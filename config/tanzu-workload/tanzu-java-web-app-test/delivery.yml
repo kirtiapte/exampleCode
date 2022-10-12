@@ -2,6 +2,9 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: tanzu-java-web-app-test
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
   labels:
     app.kubernetes.io/part-of: tanzu-java-web-app
     apps.tanzu.vmware.com/has-tests: "true"
@@ -14,7 +17,7 @@ spec:
       annotations:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.3
-        conventions.apps.tanzu.vmware.com/applied-conventions: |-
+        conventions.carto.run/applied-conventions: |-
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
@@ -41,7 +44,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.fbclouddemo.us/tap-packages/tanzu-java-web-app-test-tanzu-workload@sha256:0f3a25921c4cc88cbe227c06c76f2394b85d8e7c18863e0a4079394306a27110
+        image: harbor.fbclouddemo.us/tap-packages/tanzu-java-web-app-test-tanzu-workload@sha256:85109c5ac127b3150efb1f879b4401c4917c26a12e2b3bb027f9b1850452a6c3
         livenessProbe:
           httpGet:
             path: /livez
