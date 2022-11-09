@@ -15,7 +15,7 @@ spec:
   name: db
   service:
     apiVersion: sql.tanzu.vmware.com/v1
-    kind: Postgres
+    kind: ResourceClaim
     name: customer-profile-database
   workload:
     apiVersion: serving.knative.dev/v1
