@@ -43,7 +43,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.fbclouddemo.us/tap-packages/customer-profile-ui-tanzu-workload@sha256:f353b0d76a4834ec9944989f47b17e974ddfd193f35b6455ec81382fd8c7f5fe
+        image: harbor.fbclouddemo.us/tap-packages/customer-profile-ui-tanzu-workload@sha256:3f879cbb188efecf6fd0c58a7764139d1dbbccff74153890b8290d2395277d07
         name: workload
         ports:
         - containerPort: 8080
