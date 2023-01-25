@@ -16,7 +16,7 @@ spec:
       - name: workload
         image: harbor.fbclouddemo.us/tap-packages/example-gitwriter-sc-gitwriter-sc@sha256:eff4eb43fe2ac9c0e7b90f8d3437e69f64d06c328b61443ddf2c2db98003f934
         securityContext:
-          runAsUser: 1000
+          runAsUser: 1001
       imagePullSecrets:
       - name: registry-credentials
 
