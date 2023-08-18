@@ -16,25 +16,21 @@ spec:
   template:
     metadata:
       annotations:
-        apps.tanzu.vmware.com/live-update: "true"
-        autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
-        boot.spring.io/version: 3.0.6
+        boot.spring.io/version: 2.4.4
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
-          developer-conventions/live-update-convention
-          developer-conventions/add-source-image-label
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:99d2f0d7bc05b5a9eccf1ffc1a27670fed265ddb081cc1f110b83d16f2b52b92
+          spring-boot-convention/service-intent-mysql
         developer.conventions/target-containers: workload
+        services.conventions.carto.run/mysql: mysql-connector-java/8.0.23
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: spring-sensors
@@ -43,6 +39,7 @@ spec:
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: spring-sensors
         conventions.carto.run/framework: spring-boot
+        services.conventions.carto.run/mysql: workload
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8080"
@@ -54,22 +51,12 @@ spec:
         - name: TESTVAR
           value: aoeu
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:65af8cb183c5ad31045bf380a417ae0ddcabd615bbecef084aafb6140db20f83
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-            scheme: HTTP
+          value: -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:d64e75bb66b680bac2fd4d3a586ee2150d832b563aa654e8e3488a6cb55b6037
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
         resources:
           limits:
             memory: 512Mi
