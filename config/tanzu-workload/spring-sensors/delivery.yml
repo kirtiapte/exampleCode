@@ -69,10 +69,10 @@ spec:
             scheme: HTTP
         resources:
           limits:
-            memory: 625Mi
+            memory: 700Mi
           requests:
             cpu: 500m
-            memory: 625Mi
+            memory: 700Mi
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
