@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: spring-sensors
+  name: spring-sensors-test
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
@@ -12,7 +12,7 @@ metadata:
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
-    carto.run/workload-name: spring-sensors
+    carto.run/workload-name: spring-sensors-test
 spec:
   template:
     metadata:
@@ -38,19 +38,19 @@ spec:
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
-        carto.run/workload-name: spring-sensors
+        carto.run/workload-name: spring-sensors-test
         conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: spring-sensors
+        tanzu.app.live.view.application.name: spring-sensors-test
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:bd942f992b4c6fa62ce4d53dbaeb9b03684d014260c4b5b03d8bfff381c98e60
+        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:bd942f992b4c6fa62ce4d53dbaeb9b03684d014260c4b5b03d8bfff381c98e60
         livenessProbe:
           httpGet:
             path: /livez
