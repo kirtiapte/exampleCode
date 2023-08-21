@@ -17,11 +17,15 @@ spec:
   template:
     metadata:
       annotations:
+        apps.tanzu.vmware.com/live-update: "true"
+        autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 3.1.2
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
+          developer-conventions/live-update-convention
+          developer-conventions/add-source-image-label
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -31,6 +35,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:438beabe9d28e18e141bfbd3e38eac4882245bd98ed9697c929383b2ed83a787
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -50,7 +55,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:2c2028270a9e1bb369097b151fc1e8ef1a29a781992fae2e3ef607c5212bc0fe
+        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:279191efdb857a97030bcbc72fafa812da4dec3737f1e1a8b1af8d27d456e14c
         livenessProbe:
           httpGet:
             path: /livez
