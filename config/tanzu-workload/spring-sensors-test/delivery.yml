@@ -35,7 +35,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:438beabe9d28e18e141bfbd3e38eac4882245bd98ed9697c929383b2ed83a787
+        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:64921a4b7d256b5b20fa9512b85a0a8cd6ed585c89f003a879d98ac01e87e37c
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -55,7 +55,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:279191efdb857a97030bcbc72fafa812da4dec3737f1e1a8b1af8d27d456e14c
+        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:dd5354b5eca96a2765ad364596a627d5f2dc7161f3f5787900897b2668a45e9b
         livenessProbe:
           httpGet:
             path: /livez
