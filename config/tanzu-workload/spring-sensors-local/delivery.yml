@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: spring-sensors-test
+  name: spring-sensors-local
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
@@ -12,7 +12,7 @@ metadata:
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
-    carto.run/workload-name: spring-sensors-test
+    carto.run/workload-name: spring-sensors-local
 spec:
   template:
     metadata:
@@ -35,7 +35,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:64921a4b7d256b5b20fa9512b85a0a8cd6ed585c89f003a879d98ac01e87e37c
+        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest@sha256:1aa90a1ec936248348159a7e9b5e200720ed2c5acb6a30c564693ee2384aba1b
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -43,19 +43,19 @@ spec:
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
-        carto.run/workload-name: spring-sensors-test
+        carto.run/workload-name: spring-sensors-local
         conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: spring-sensors-test
+        tanzu.app.live.view.application.name: spring-sensors-local
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-test-tanzu-workload@sha256:dd5354b5eca96a2765ad364596a627d5f2dc7161f3f5787900897b2668a45e9b
+        image: kapte.azurecr.io/tap-packages/spring-sensors-local-tanzu-workload@sha256:4babb02f518627fdd28641a17ab9bd4fa9a903e26718a64c11f274314052ffda
         livenessProbe:
           httpGet:
             path: /livez
