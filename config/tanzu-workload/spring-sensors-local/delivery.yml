@@ -17,7 +17,6 @@ spec:
   template:
     metadata:
       annotations:
-        apps.tanzu.vmware.com/correlationid: kapte.azurecr.io/tap-packages/tanzu-java-web-app-test:latest?sub_path=/
         apps.tanzu.vmware.com/live-update: "true"
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
@@ -79,10 +78,5 @@ spec:
             memory: 700Mi
         securityContext:
           runAsUser: 1000
-        startupProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
       serviceAccountName: default
 
